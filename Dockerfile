@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 #
-# Copyright 2024 Nialto Services Ltd
+# Copyright 2025 Nialto Services Ltd
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-FROM alpine:3.20 AS build
+FROM alpine:3.21 AS build
 
 ARG DOVECOT_VERSION="2.3.21"
 
@@ -34,7 +34,7 @@ WORKDIR /usr/src/dovecot-xaps-plugin/build
 RUN cmake .. -DCMAKE_BUILD_TYPE=Release
 RUN make
 
-FROM alpine:3.20
+FROM alpine:3.21
 
 LABEL org.opencontainers.image.description="Dovecot"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
