@@ -15,25 +15,6 @@
 # limitations under the License.
 #
 
-FROM alpine:3.21 AS build
-
-ARG DOVECOT_VERSION="2.3.21"
-
-RUN apk upgrade --no-cache
-RUN \
-apk add --no-cache \
-build-base \
-cmake \
-dovecot~=$DOVECOT_VERSION \
-dovecot-dev~=$DOVECOT_VERSION
-
-COPY dovecot-xaps-plugin /usr/src/dovecot-xaps-plugin
-
-WORKDIR /usr/src/dovecot-xaps-plugin/build
-
-RUN cmake .. -DCMAKE_BUILD_TYPE=Release
-RUN make
-
 FROM alpine:3.21
 
 LABEL org.opencontainers.image.description="Dovecot"
@@ -69,8 +50,6 @@ dovecot-sql~=$DOVECOT_VERSION \
 dovecot-sqlite~=$DOVECOT_VERSION \
 dovecot-submissiond~=$DOVECOT_VERSION
 
-COPY --from=build /usr/src/dovecot-xaps-plugin/build/lib25_xaps_imap_plugin.so /usr/lib/dovecot/lib25_xaps_imap_plugin.so
-COPY --from=build /usr/src/dovecot-xaps-plugin/build/lib25_xaps_push_notification_plugin.so /usr/lib/dovecot/lib25_xaps_push_notification_plugin.so
 COPY bin/bootstrap /usr/local/sbin/bootstrap
 
 ENTRYPOINT ["/usr/local/sbin/bootstrap"]

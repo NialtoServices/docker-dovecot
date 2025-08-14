@@ -1,3 +1,0 @@
-[submodule "dovecot-xaps-plugin"]
-	path = dovecot-xaps-plugin
-	url = https://github.com/freswa/dovecot-xaps-plugin
