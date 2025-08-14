@@ -15,13 +15,13 @@
 # limitations under the License.
 #
 
-FROM alpine:3.21
+FROM alpine:3.22
 
 LABEL org.opencontainers.image.description="Dovecot"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 LABEL org.opencontainers.image.source="https://github.com/NialtoServices/docker-dovecot"
 
-ARG DOVECOT_VERSION="2.3.21"
+ARG DOVECOT_VERSION="2.4.1"
 
 RUN apk upgrade --no-cache
 
